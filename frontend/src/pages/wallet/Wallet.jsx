@@ -1,10 +1,11 @@
-import {
+import { 
   FaCoins,
   FaMoneyBillWave,
   FaWallet,
 } from "react-icons/fa";
 
 import useWallet from "../../hooks/wallet/useWallet";
+import SendCoinModal from "../../components/wallet/SendCoinModal";
 
 const Wallet = () => {
   const { data, isLoading, error } = useWallet();
@@ -117,6 +118,7 @@ const Wallet = () => {
           <h3 className="mb-4 text-xl font-bold text-white">
             Wallet Statistics
           </h3>
+          
 
           <div className="space-y-3 text-slate-300">
 
@@ -166,6 +168,9 @@ const Wallet = () => {
         </div>
 
       </div>
+      
+      <SendCoinModal />
+
     </div>
   );
 };
