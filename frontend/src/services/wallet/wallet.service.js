@@ -9,3 +9,8 @@ export const sendCoin = async (payload) => {
   const { data } = await api.post("/wallet/send", payload);
   return data;
 };
+
+export const withdraw = async (payload) => {
+  const { data } = await api.post("/wallet/withdraw", payload);
+  return data;
+};

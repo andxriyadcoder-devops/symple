@@ -6,6 +6,7 @@ import {
 
 import useWallet from "../../hooks/wallet/useWallet";
 import SendCoinModal from "../../components/wallet/SendCoinModal";
+import WithdrawModal from "../../components/wallet/WithdrawModal";
 
 const Wallet = () => {
   const { data, isLoading, error } = useWallet();
@@ -169,7 +170,10 @@ const Wallet = () => {
 
       </div>
       
-      <SendCoinModal />
+      <div className="grid gap-6 lg:grid-cols-2">
+        <SendCoinModal />
+        <WithdrawModal />
+      </div>
 
     </div>
   );
