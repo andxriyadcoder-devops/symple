@@ -9,6 +9,7 @@ import SendCoinModal from "../../components/wallet/SendCoinModal";
 import WithdrawModal from "../../components/wallet/WithdrawModal";
 import RecentTransactions from "../../components/wallet/RecentTransactions";
 import ClaimDailyRewardCard from "../../components/wallet/ClaimDailyRewardCard";
+import DepositModal from "../../components/wallet/DepositModal";
 
 
 const Wallet = () => {
@@ -177,6 +178,7 @@ const Wallet = () => {
         <SendCoinModal />
         <WithdrawModal />
         <ClaimDailyRewardCard />
+        <DepositModal />
       </div>
 
       <RecentTransactions />

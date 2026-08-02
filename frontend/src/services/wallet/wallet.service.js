@@ -14,3 +14,8 @@ export const withdraw = async (payload) => {
   const { data } = await api.post("/wallet/withdraw", payload);
   return data;
 };
+
+export const deposit = async (payload) => {
+  const { data } = await api.post("/payments/deposit", payload);
+  return data;
+};
