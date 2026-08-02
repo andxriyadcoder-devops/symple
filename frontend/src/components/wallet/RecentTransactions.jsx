@@ -1,4 +1,7 @@
 import useTransactions from "../../hooks/transaction/useTransactions";
+import { useState } from "react";
+import TransactionDetailsModal from "./TransactionDetailsModal";
+
 
 const RecentTransactions = () => {
   const { data, isLoading } = useTransactions({
@@ -33,7 +36,11 @@ const RecentTransactions = () => {
           {transactions.map((item) => (
             <div
               key={item._id}
-              className="flex items-center justify-between rounded-xl bg-slate-800 p-4"
+              onClick={() => {
+                setSelectedTransaction(item);
+                setOpen(true);
+              }}
+              className="flex cursor-pointer items-center justify-between rounded-xl bg-slate-800 p-4 transition hover:bg-slate-700"
             >
               <div>
                 <p className="font-semibold text-white">
@@ -60,6 +67,14 @@ const RecentTransactions = () => {
           ))}
         </div>
       )}
+      <TransactionDetailsModal
+        open={open}
+        transaction={selectedTransaction}
+        onClose={() => {
+          setOpen(false);
+          setSelectedTransaction(null);
+        }}
+      />
     </div>
   );
 };
