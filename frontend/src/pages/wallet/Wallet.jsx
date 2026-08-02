@@ -7,6 +7,9 @@ import {
 import useWallet from "../../hooks/wallet/useWallet";
 import SendCoinModal from "../../components/wallet/SendCoinModal";
 import WithdrawModal from "../../components/wallet/WithdrawModal";
+import RecentTransactions from "../../components/wallet/RecentTransactions";
+import ClaimDailyRewardCard from "../../components/wallet/ClaimDailyRewardCard";
+
 
 const Wallet = () => {
   const { data, isLoading, error } = useWallet();
@@ -173,7 +176,10 @@ const Wallet = () => {
       <div className="grid gap-6 lg:grid-cols-2">
         <SendCoinModal />
         <WithdrawModal />
+        <ClaimDailyRewardCard />
       </div>
+
+      <RecentTransactions />
 
     </div>
   );
