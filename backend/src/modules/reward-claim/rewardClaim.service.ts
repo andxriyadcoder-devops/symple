@@ -60,7 +60,7 @@ export class RewardClaimService {
   }
 
   async myClaims(userId: string) {
-    return rewardClaimRepository.findByUser(userId);
+  return rewardClaimRepository.findByUser(userId);
   }
 
   async allClaims() {

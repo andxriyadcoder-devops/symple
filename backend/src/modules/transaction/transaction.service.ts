@@ -49,8 +49,20 @@ export class TransactionService {
     });
   }
 
-  async getMyTransactions(userId: string) {
-    return this.repository.findByUserId(userId);
+  async getMyTransactions(
+    userId: string,
+    page: number,
+    limit: number,
+    type?: string,
+    search?: string,
+  ) {
+    return this.repository.findMyTransactions(
+      userId,
+      page,
+      limit,
+      type,
+      search,
+    );
   }
 
   async claimDailyLogin(
@@ -141,21 +153,21 @@ export class TransactionService {
   );
 }
 
-async rejectWithdraw(id: string) {
-  const transaction = await this.repository.findById(id);
+  async rejectWithdraw(id: string) {
+    const transaction = await this.repository.findById(id);
 
-  if (!transaction) {
-    throw new AppError("Withdraw request not found", 404);
-  }
+    if (!transaction) {
+      throw new AppError("Withdraw request not found", 404);
+    }
 
-  if (transaction.status !== TransactionStatus.PENDING) {
-    throw new AppError("Withdraw request already processed", 400);
-  }
+    if (transaction.status !== TransactionStatus.PENDING) {
+      throw new AppError("Withdraw request already processed", 400);
+    }
 
-  return this.repository.updateStatus(
-    id,
-    TransactionStatus.CANCELLED
-  );
+    return this.repository.updateStatus(
+      id,
+      TransactionStatus.CANCELLED
+    );
   }
 }
 

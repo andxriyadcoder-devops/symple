@@ -1,8 +1,49 @@
-import { FaMoneyCheckAlt } from "react-icons/fa";
+import { useState } from "react";
+
+import useTransactions from "../../hooks/transaction/useTransactions";
+
+import TransactionFilters from "../../components/transactions/TransactionFilters";
+import TransactionTable from "../../components/transactions/TransactionTable";
+import TransactionPagination from "../../components/transactions/TransactionPagination";
 
 const Transactions = () => {
+  const [page, setPage] = useState(1);
+  const [limit] = useState(10);
+  const [type, setType] = useState("ALL");
+  const [search, setSearch] = useState("");
+
+  const { data, isLoading, error } = useTransactions({
+    page,
+    limit,
+    type,
+    search,
+  });
+
+  if (isLoading) {
+    return (
+      <div className="flex h-80 items-center justify-center">
+        <div className="h-10 w-10 animate-spin rounded-full border-4 border-cyan-500 border-t-transparent"></div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="flex h-80 items-center justify-center text-red-500">
+        Failed to load transactions.
+      </div>
+    );
+  }
+
+  const transactions = data?.data?.transactions || [];
+
+  const pagination = data?.data?.pagination || {
+    page: 1,
+    totalPages: 1,
+  };
+
   return (
-    <div className="space-y-8">
+    <div className="space-y-6">
       <div>
         <h1 className="text-3xl font-bold text-white">
           Transactions
@@ -13,24 +54,20 @@ const Transactions = () => {
         </p>
       </div>
 
-      <div className="rounded-3xl border border-slate-800 bg-slate-900 p-8">
-        <div className="flex items-center gap-4">
-          <FaMoneyCheckAlt
-            size={32}
-            className="text-cyan-400"
-          />
+      <TransactionFilters
+        search={search}
+        setSearch={setSearch}
+        type={type}
+        setType={setType}
+      />
 
-          <div>
-            <h2 className="text-xl font-bold text-white">
-              No Transactions Yet
-            </h2>
+      <TransactionTable transactions={transactions} />
 
-            <p className="text-slate-400">
-              Your latest transactions will appear here.
-            </p>
-          </div>
-        </div>
-      </div>
+      <TransactionPagination
+        page={pagination.page}
+        totalPages={pagination.totalPages}
+        setPage={setPage}
+      />
     </div>
   );
 };

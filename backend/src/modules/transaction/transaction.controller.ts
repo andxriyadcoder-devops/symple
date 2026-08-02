@@ -6,9 +6,19 @@ import { sendResponse } from "@/shared/utils";
 
 export class TransactionController {
   async myTransactions(req: AuthRequest, res: Response) {
-    const transactions = await transactionService.getMyTransactions(
-      req.user!.id
-    );
+    const page = Number(req.query.page) || 1;
+    const limit = Number(req.query.limit) || 10;
+    const type = req.query.type as string | undefined;
+    const search = req.query.search as string | undefined;
+
+    const transactions =
+      await transactionService.getMyTransactions(
+        req.user!.id,
+        page,
+        limit,
+        type,
+        search,
+      );
 
     return sendResponse(res, {
       success: true,
