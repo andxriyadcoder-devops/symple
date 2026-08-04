@@ -10,6 +10,7 @@ import WithdrawModal from "../../components/wallet/WithdrawModal";
 import RecentTransactions from "../../components/wallet/RecentTransactions";
 import ClaimDailyRewardCard from "../../components/wallet/ClaimDailyRewardCard";
 import DepositModal from "../../components/wallet/DepositModal";
+import WalletQRCode from "../../components/wallet/qr/WalletQRCode";
 
 
 const Wallet = () => {
@@ -184,6 +185,11 @@ const Wallet = () => {
       <div className="mt-8">
         <RecentTransactions />
       </div>
+
+      <div className="mt-6">
+        <WalletQRCode walletId={wallet?.walletId} />
+      </div>
+      
     </div>
   );
 };
