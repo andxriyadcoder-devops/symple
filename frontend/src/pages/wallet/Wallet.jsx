@@ -181,8 +181,9 @@ const Wallet = () => {
         <DepositModal />
       </div>
 
-      <RecentTransactions />
-
+      <div className="mt-8">
+        <RecentTransactions />
+      </div>
     </div>
   );
 };
